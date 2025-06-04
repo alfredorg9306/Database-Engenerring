@@ -1,0 +1,13 @@
+import mysql.connector as connector  # importing mysql connector using an alias
+from mysql.connector import errorcode # importing errorcode to get the error from the connection
+
+#using the try catch to get the erros through the errorcode.
+try:
+    connection = connector.connect(user="root", password="rosales93.", database="skincareeli")
+except connector.Error as err:
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR: # use or password are incorrect
+        print("connection user or password are incorrect")
+    elif err.errno == errorcode.ER_BAD_DB_ERROR: # database does not exist
+        print("database does not exist")
+    else:
+        print(err)
